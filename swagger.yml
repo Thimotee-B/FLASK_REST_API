@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "All book schedules"
+  version: 1.0.0
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    Schedule:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        start_datetime:
+          type: "string"
+        end_datetime:
+          type: "string"
+        employee_number:
+          type: "string"
+
+paths:
+  /schedule:
+    post:
+      operationId: "controller.schedule.create"
+      tags:
+        - Schedule
+      summary: "Create a schedule"
+      requestBody:
+          description: "Schedule to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "schedule"
+                $ref: "#/components/schemas/Schedule"
+      responses:
+        "201":
+          description: "Successfully created schedule"
+    get:
+      operationId: "controller.schedule.read_all"
+      tags:
+        - Schedule
+      summary: "Read the list of schedules"
+      responses:
+        "200":
+          description: "Successfully read all schedules"
+    
