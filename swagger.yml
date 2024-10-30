@@ -20,6 +20,15 @@ components:
           type: "string"
         employee_number:
           type: "string"
+    Employee:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        name:
+          type: "string"
+        schedule_id:
+          type: "string"
 
 paths:
   /schedule:
@@ -37,7 +46,7 @@ paths:
                 x-body-name: "schedule"
                 $ref: "#/components/schemas/Schedule"
       responses:
-        "201":
+        "200":
           description: "Successfully created schedule"
     get:
       operationId: "controller.schedule.read_all"
@@ -47,4 +56,29 @@ paths:
       responses:
         "200":
           description: "Successfully read all schedules"
+  /employee:
+    post:
+      operationId: "controller.employee.create"
+      tags:
+        - Employee
+      summary: "Create an employee"
+      requestBody:
+          description: "Employee to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "employee"
+                $ref: "#/components/schemas/Employee"
+      responses:
+        "200":
+          description: "Successfully created employee"
+    get:
+      operationId: "controller.employee.read_all"
+      tags:
+        - Employee
+      summary: "Read the list of employees"
+      responses:
+        "200":
+          description: "Successfully read all employees"
     
